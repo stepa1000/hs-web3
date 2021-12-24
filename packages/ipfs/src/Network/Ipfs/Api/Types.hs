@@ -755,69 +755,69 @@ instance Servant.API.Accept IpfsJSON where
 instance MimeUnrender IpfsJSON Text where
     mimeUnrender _ = left show . TextS.decodeUtf8' . toStrict
 
-type IpfsApi = "cat" :> Capture "arg" Text :> Get '[IpfsText] CatReturnType
-            :<|> "ls" :> Capture "arg" Text :> Get '[JSON] LsObj
-            :<|> "get" :> Capture "arg" Text :> Get '[IpfsText] GetReturnType
-            :<|> "swarm" :> "peers" :> Get '[JSON] SwarmPeersObj
-            :<|> "swarm" :> "connect" :> QueryParam "arg" Text :> Get '[JSON] SwarmObj
-            :<|> "swarm" :> "disconnect" :> QueryParam "arg" Text :> Get '[JSON] SwarmObj
-            :<|> "swarm" :> "filters" :> Get '[JSON] SwarmObj
-            :<|> "swarm" :> "filters" :> "add" :> QueryParam "arg" Text :> Get '[JSON] SwarmObj
-            :<|> "swarm" :> "filters" :> "rm" :> QueryParam "arg" Text :> Get '[JSON] SwarmObj
-            :<|> "bitswap" :> "stat" :> Get '[JSON] BitswapStatObj
-            :<|> "bitswap" :> "wantlist" :> Get '[JSON] BitswapWLObj
-            :<|> "bitswap" :> "ledger" :> Capture "peerId" Text :> Get '[JSON] BitswapLedgerObj
-            :<|> "bitswap" :> "reprovide" :> Get '[IpfsText] ReprovideReturnType
-            :<|> "cid" :> "bases" :> Get '[JSON] [CidBasesObj]
-            :<|> "cid" :> "codecs" :> Get '[JSON] [CidCodecsObj]
-            :<|> "cid" :> "hashes" :> Get '[JSON] [CidHashesObj]
-            :<|> "cid" :> "base32" :> Capture "cid" Text :> Get '[JSON] CidObj
-            :<|> "cid" :> "format" :> Capture "cid" Text :> Get '[JSON] CidObj
-            :<|> "block" :> "get" :> Capture "key" Text :> Get '[IpfsText] BlockReturnType
-            :<|> "block" :> "stat" :> Capture "key" Text :> Get '[JSON] BlockObj
-            :<|> "dag" :> "get" :> Capture "ref" Text :> Get '[IpfsJSON] DagReturnType
-            :<|> "dag" :> "resolve" :> Capture "ref" Text :> Get '[JSON] DagResolveObj
-            :<|> "config" :> Capture "ref" Text :> Get '[JSON] ConfigObj
-            :<|> "config" :> Capture "arg" Text :> QueryParam "arg" Text :> Get '[JSON] ConfigObj
-            :<|> "object" :> "data" :> Capture "ref" Text :> Get '[IpfsText] ObjectReturnType
-            :<|> "object" :> "new" :> Get '[JSON] ObjectObj
-            :<|> "object" :> "links" :>  Capture "ref" Text :> Get '[JSON] ObjectLinksObj
+type IpfsApi = "cat" :> Capture "arg" Text :> Post '[IpfsText] CatReturnType
+            :<|> "ls" :> Capture "arg" Text :> Post '[JSON] LsObj
+            :<|> "get" :> Capture "arg" Text :> Post '[IpfsText] GetReturnType
+            :<|> "swarm" :> "peers" :> Post '[JSON] SwarmPeersObj
+            :<|> "swarm" :> "connect" :> QueryParam "arg" Text :> Post '[JSON] SwarmObj
+            :<|> "swarm" :> "disconnect" :> QueryParam "arg" Text :> Post '[JSON] SwarmObj
+            :<|> "swarm" :> "filters" :> Post '[JSON] SwarmObj
+            :<|> "swarm" :> "filters" :> "add" :> QueryParam "arg" Text :> Post '[JSON] SwarmObj
+            :<|> "swarm" :> "filters" :> "rm" :> QueryParam "arg" Text :> Post '[JSON] SwarmObj
+            :<|> "bitswap" :> "stat" :> Post '[JSON] BitswapStatObj
+            :<|> "bitswap" :> "wantlist" :> Post '[JSON] BitswapWLObj
+            :<|> "bitswap" :> "ledger" :> Capture "peerId" Text :> Post '[JSON] BitswapLedgerObj
+            :<|> "bitswap" :> "reprovide" :> Post '[IpfsText] ReprovideReturnType
+            :<|> "cid" :> "bases" :> Post '[JSON] [CidBasesObj]
+            :<|> "cid" :> "codecs" :> Post '[JSON] [CidCodecsObj]
+            :<|> "cid" :> "hashes" :> Post '[JSON] [CidHashesObj]
+            :<|> "cid" :> "base32" :> Capture "cid" Text :> Post '[JSON] CidObj
+            :<|> "cid" :> "format" :> Capture "cid" Text :> Post '[JSON] CidObj
+            :<|> "block" :> "get" :> Capture "key" Text :> Post '[IpfsText] BlockReturnType
+            :<|> "block" :> "stat" :> Capture "key" Text :> Post '[JSON] BlockObj
+            :<|> "dag" :> "get" :> Capture "ref" Text :> Post '[IpfsJSON] DagReturnType
+            :<|> "dag" :> "resolve" :> Capture "ref" Text :> Post '[JSON] DagResolveObj
+            :<|> "config" :> Capture "ref" Text :> Post '[JSON] ConfigObj
+            :<|> "config" :> Capture "arg" Text :> QueryParam "arg" Text :> Post '[JSON] ConfigObj
+            :<|> "object" :> "data" :> Capture "ref" Text :> Post '[IpfsText] ObjectReturnType
+            :<|> "object" :> "new" :> Post '[JSON] ObjectObj
+            :<|> "object" :> "links" :>  Capture "ref" Text :> Post '[JSON] ObjectLinksObj
             :<|> "object" :> "patch" :> "add-link" :> Capture "arg" Text
-                :> QueryParam "arg" Text :> QueryParam "arg" Text :> Get '[JSON] ObjectLinksObj
+                :> QueryParam "arg" Text :> QueryParam "arg" Text :> Post '[JSON] ObjectLinksObj
             :<|> "object" :> "patch" :> "rm-link" :> Capture "arg" Text
-                :> QueryParam "arg" Text :> Get '[JSON] ObjectLinksObj
-            :<|> "object" :> "get" :> Capture "arg" Text :> Get '[JSON] ObjectGetObj
-            :<|> "object" :> "diff" :> Capture "arg" Text :> QueryParam "arg" Text :> Get '[JSON] ObjectDiffObj
-            :<|> "object" :> "stat" :> Capture "arg" Text :> Get '[JSON] ObjectStatObj
-            :<|> "pin" :> "add" :> Capture "arg" Text :> Get '[JSON] PinObj
-            :<|> "pin" :> "rm" :> Capture "arg" Text :> Get '[JSON] PinObj
-            :<|> "bootstrap" :> "add" :> QueryParam "arg" Text :> Get '[JSON] BootstrapObj
-            :<|> "bootstrap" :> "list" :> Get '[JSON] BootstrapObj
-            :<|> "bootstrap" :> "rm" :> QueryParam "arg" Text :> Get '[JSON] BootstrapObj
-            :<|> "stats" :> "bw" :> Get '[JSON] StatsBwObj
-            :<|> "stats" :> "repo" :> Get '[JSON] StatsRepoObj
-            :<|> "version" :> Get '[JSON] VersionObj
-            :<|> "id" :> Get '[JSON] IdObj
-            :<|> "id" :> Capture "arg" Text :> Get '[JSON] IdObj
-            :<|> "dns" :> Capture "arg" Text :> Get '[JSON] DnsObj
-            :<|> "pubsub" :> "ls" :>  Get '[JSON] PubsubObj
-            :<|> "pubsub" :> "peers" :>  Get '[JSON] PubsubObj
-            :<|> "pubsub" :> "pub" :> Capture "arg" Text :> QueryParam "arg" Text :> Get '[JSON] NoContent
-            :<|> "log" :> "ls" :>  Get '[JSON] LogLsObj
-            :<|> "log" :> "level" :> Capture "arg" Text :> QueryParam "arg" Text :> Get '[JSON] LogLevelObj
-            :<|> "repo" :> "version" :>  Get '[JSON] RepoVersionObj
-            :<|> "repo" :> "fsck" :>  Get '[JSON] RepoFsckObj
-            :<|> "key" :> "gen" :> Capture "arg" Text :> QueryParam "type" Text :> Get '[JSON] KeyDetailsObj
-            :<|> "key" :> "list" :>  Get '[JSON] KeyObj
-            :<|> "key" :> "rename" :> Capture "arg" Text :> QueryParam "arg" Text :> Get '[JSON] KeyRenameObj
-            :<|> "key" :> "rm" :> Capture "arg" Text :> Get '[JSON] KeyObj
-            :<|> "files" :> "chcid" :> QueryParam "arg" Text :> QueryParam "cid-version" Int :> Get '[JSON] NoContent
-            :<|> "files" :> "cp" :> QueryParam "arg" Text :> QueryParam "arg" Text :> Get '[JSON] NoContent
-            :<|> "files" :> "flush" :> QueryParam "arg" Text :> Get '[JSON] FilesFlushObj
-            :<|> "files" :> "ls" :> QueryParam "arg" Text :> Get '[JSON] FilesLsObj
-            :<|> "files" :> "mkdir" :> QueryParam "arg" Text :> Get '[JSON] NoContent
-            :<|> "files" :> "mv" :> QueryParam "arg" Text :> QueryParam "arg" Text :> Get '[JSON] NoContent
-            :<|> "files" :> "read" :> QueryParam "arg" Text :> Get '[IpfsText] FilesReadType
-            :<|> "files" :> "rm" :> QueryParam "arg" Text :> QueryParam "recursive" Bool :> Get '[JSON] NoContent
-            :<|> "files" :> "stat" :> QueryParam "arg" Text :> Get '[JSON] FilesStatObj
-            :<|> "shutdown" :> Get '[JSON] NoContent
+                :> QueryParam "arg" Text :> Post '[JSON] ObjectLinksObj
+            :<|> "object" :> "get" :> Capture "arg" Text :> Post '[JSON] ObjectGetObj
+            :<|> "object" :> "diff" :> Capture "arg" Text :> QueryParam "arg" Text :> Post '[JSON] ObjectDiffObj
+            :<|> "object" :> "stat" :> Capture "arg" Text :> Post '[JSON] ObjectStatObj
+            :<|> "pin" :> "add" :> Capture "arg" Text :> Post '[JSON] PinObj
+            :<|> "pin" :> "rm" :> Capture "arg" Text :> Post '[JSON] PinObj
+            :<|> "bootstrap" :> "add" :> QueryParam "arg" Text :> Post '[JSON] BootstrapObj
+            :<|> "bootstrap" :> "list" :> Post '[JSON] BootstrapObj
+            :<|> "bootstrap" :> "rm" :> QueryParam "arg" Text :> Post '[JSON] BootstrapObj
+            :<|> "stats" :> "bw" :> Post '[JSON] StatsBwObj
+            :<|> "stats" :> "repo" :> Post '[JSON] StatsRepoObj
+            :<|> "version" :> Post '[JSON] VersionObj
+            :<|> "id" :> Post '[JSON] IdObj
+            :<|> "id" :> Capture "arg" Text :> Post '[JSON] IdObj
+            :<|> "dns" :> Capture "arg" Text :> Post '[JSON] DnsObj
+            :<|> "pubsub" :> "ls" :>  Post '[JSON] PubsubObj
+            :<|> "pubsub" :> "peers" :>  Post '[JSON] PubsubObj
+            :<|> "pubsub" :> "pub" :> Capture "arg" Text :> QueryParam "arg" Text :> Post '[JSON] NoContent
+            :<|> "log" :> "ls" :>  Post '[JSON] LogLsObj
+            :<|> "log" :> "level" :> Capture "arg" Text :> QueryParam "arg" Text :> Post '[JSON] LogLevelObj
+            :<|> "repo" :> "version" :>  Post '[JSON] RepoVersionObj
+            :<|> "repo" :> "fsck" :>  Post '[JSON] RepoFsckObj
+            :<|> "key" :> "gen" :> Capture "arg" Text :> QueryParam "type" Text :> Post '[JSON] KeyDetailsObj
+            :<|> "key" :> "list" :>  Post '[JSON] KeyObj
+            :<|> "key" :> "rename" :> Capture "arg" Text :> QueryParam "arg" Text :> Post '[JSON] KeyRenameObj
+            :<|> "key" :> "rm" :> Capture "arg" Text :> Post '[JSON] KeyObj
+            :<|> "files" :> "chcid" :> QueryParam "arg" Text :> QueryParam "cid-version" Int :> Post '[JSON] NoContent
+            :<|> "files" :> "cp" :> QueryParam "arg" Text :> QueryParam "arg" Text :> Post '[JSON] NoContent
+            :<|> "files" :> "flush" :> QueryParam "arg" Text :> Post '[JSON] FilesFlushObj
+            :<|> "files" :> "ls" :> QueryParam "arg" Text :> Post '[JSON] FilesLsObj
+            :<|> "files" :> "mkdir" :> QueryParam "arg" Text :> Post '[JSON] NoContent
+            :<|> "files" :> "mv" :> QueryParam "arg" Text :> QueryParam "arg" Text :> Post '[JSON] NoContent
+            :<|> "files" :> "read" :> QueryParam "arg" Text :> Post '[IpfsText] FilesReadType
+            :<|> "files" :> "rm" :> QueryParam "arg" Text :> QueryParam "recursive" Bool :> Post '[JSON] NoContent
+            :<|> "files" :> "stat" :> QueryParam "arg" Text :> Post '[JSON] FilesStatObj
+            :<|> "shutdown" :> Post '[JSON] NoContent
