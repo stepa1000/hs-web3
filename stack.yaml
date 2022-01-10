@@ -17,6 +17,7 @@ packages:
 - 'examples/erc20'
 - 'examples/scale'
 - 'examples/polkadot'
+#- 'examples/ipfs'
 
 # Extra package dependencies
 extra-deps:
