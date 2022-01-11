@@ -779,7 +779,8 @@ type IpfsApi = "cat" :> Capture "arg" Text :> Post '[IpfsText] CatReturnType
             :<|> "dag" :> "resolve" :> Capture "ref" Text :> Post '[JSON] DagResolveObj
             :<|> "config" :> Capture "ref" Text :> Post '[JSON] ConfigObj
             :<|> "config" :> Capture "arg" Text :> QueryParam "arg" Text :> Post '[JSON] ConfigObj
-            :<|> "object" :> "data" :> Capture "arg" Text :> Post '[IpfsText] ObjectReturnType
+            :<|> "object" :> "data" :> QueryParam "arg" Text :> Post '[IpfsText] ObjectReturnType
+            -- :<|> "object" :> "data" :> Capture "arg" Text :> Post '[IpfsText] ObjectReturnType
             :<|> "object" :> "new" :> Post '[JSON] ObjectObj
             :<|> "object" :> "links" :>  Capture "ref" Text :> Post '[JSON] ObjectLinksObj
             :<|> "object" :> "patch" :> "add-link" :> Capture "arg" Text

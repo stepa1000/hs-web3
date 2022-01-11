@@ -46,7 +46,7 @@ _dagGet :: Text -> ClientM DagReturnType
 _dagResolve :: Text -> ClientM DagResolveObj
 _configGet :: Text -> ClientM ConfigObj
 _configSet :: Text -> Maybe Text -> ClientM ConfigObj
-_objectData :: Text -> ClientM ObjectReturnType
+_objectData :: Maybe Text -> ClientM ObjectReturnType
 _objectNew :: ClientM ObjectObj
 _objectGetLinks :: Text -> ClientM ObjectLinksObj
 _objectAddLink :: Text -> Maybe Text -> Maybe Text -> ClientM ObjectLinksObj

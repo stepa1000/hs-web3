@@ -32,7 +32,7 @@ import           Network.Ipfs.Client            (IpfsT)
 
 -- | Output the raw bytes of an IPFS object.
 object :: MonadIO m => Text -> IpfsT m ObjectReturnType
-object = call . _objectData
+object = call . _objectData . Just
 
 -- | Create a new object from an ipfs template.
 new :: MonadIO m => IpfsT m ObjectObj
