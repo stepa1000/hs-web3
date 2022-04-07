@@ -30,6 +30,6 @@ executable example-scale
   build-depends:
       base
     , generics-sop
-    , web3-hexstring
-    , web3-scale
+    , memory-hexstring
+    , scale
   default-language: Haskell2010

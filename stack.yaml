@@ -12,11 +12,11 @@ packages:
 - 'packages/provider'
 - 'packages/solidity'
 - 'packages/ethereum'
-- 'packages/polkadot'
+#- 'packages/polkadot'
 - 'packages/hexstring'
 - 'examples/erc20'
 - 'examples/scale'
-- 'examples/polkadot'
+#- 'examples/polkadot'
 #- 'examples/ipfs'
 
 # Extra package dependencies
