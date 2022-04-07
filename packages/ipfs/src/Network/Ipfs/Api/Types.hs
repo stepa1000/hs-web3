@@ -23,7 +23,8 @@ import           Control.Monad
 import           Data.Aeson
 import           Data.ByteString.Lazy       (toStrict)
 import qualified Data.ByteString.Lazy.Char8 ()
-import qualified Data.HashMap.Strict        as H
+import qualified Data.HashMap.Strict()
+import           Data.Aeson.KeyMap          as KM
 import           Data.Int
 import           Data.Text                  (Text)
 import qualified Data.Text.Encoding         as TextS
@@ -536,12 +537,12 @@ instance FromJSON ObjectObj where
 
 instance FromJSON ObjectLinksObj where
     parseJSON (Object v) =
-        case H.lookup "Links" v of
+        case KM.lookup "Links" v of
             Just (_) -> WithLinks <$> v .: "Hash"
                                   <*> v .: "Links"
 
             Nothing ->
-                case H.lookup "Hash" v of
+                case KM.lookup "Hash" v of
                       Just (_) -> WithoutLinks <$> v .: "Hash"
                       Nothing  -> mzero
 
@@ -588,12 +589,12 @@ instance FromJSON ObjectDiffObj where
 
 instance FromJSON PinObj where
     parseJSON (Object v) =
-        case H.lookup "Progress" v of
+        case KM.lookup "Progress" v of -- Expected: H.HashMap k2 v2 Actual: Object
             Just (_) -> WithProgress <$> v .: "Pins"
                                      <*> v .: "Progress"
 
             Nothing ->
-                case H.lookup "Pins" v of
+                case KM.lookup "Pins" v of
                       Just (_) -> WithoutProgress <$> v .: "Pins"
                       Nothing  -> mzero
 

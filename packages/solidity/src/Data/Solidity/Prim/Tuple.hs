@@ -2,6 +2,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE StandaloneDeriving  #-}
 {-# LANGUAGE TemplateHaskell     #-}
+{-# LANGUAGE TypeSynonymInstances #-}
 
 -- |
 -- Module      :  Data.Solidity.Prim.Tuple
@@ -26,7 +27,7 @@ import           Data.Solidity.Abi           (AbiGet, AbiPut, AbiType (..))
 import           Data.Solidity.Abi.Generic   ()
 import           Data.Solidity.Prim.Tuple.TH (tupleDecs)
 
-deriving instance GHC.Generic (OneTuple a)
+--deriving instance GHC.Generic (OneTuple a)
 instance Generic (OneTuple a)
 
 instance AbiType a => AbiType (OneTuple a) where

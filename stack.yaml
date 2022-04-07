@@ -1,5 +1,5 @@
 # Resolver to choose a 'specific' stackage snapshot or a compiler version.
-resolver: lts-18.23
+resolver: lts-19.0
 
 # User packages to be built.
 packages:
@@ -22,6 +22,7 @@ packages:
 # Extra package dependencies
 extra-deps:
 - animalcase-0.1.0.2@sha256:d7b80c3130c68d7ce8ddd9782588b2c4dd7da86461f302c54cc4acddf0902b51
+- relapse-1.0.0.0@sha256:b89ea23189e07f377be4e2a4deccf3d6ba7f547ed8ad77e27b35d78801efd81c
 
 # Dependencies bounds
 pvp-bounds: both
